@@ -1,4 +1,4 @@
-The users.sh file in task1 folder is used to add users to the server
+The https://github.com/parth-kohli/sysadtask/blob/main/delta%20task/task1/users.sh file in task1 folder is used to add users to the server
 The author.sh file in task2 folder is used by author to publish, archive, delete or edit a blog
 The blacklist.sh file in task 3 folder is used by mods to censor contents of the authors under them
 The fyp.sh file in task 4 folder is used by admins to make the for you page for users
