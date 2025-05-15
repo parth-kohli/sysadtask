@@ -1,0 +1,2 @@
+%g_user ALL=NOPASSWD: /usr/local/bin/request_author.sh
+
