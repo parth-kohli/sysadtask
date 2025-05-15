@@ -1,15 +1,25 @@
 #!/bin/bash
-
+today=$(date +%Y-%m-%d)
+day=$(date +%d)
+month=$(date +%m)
+weekday=$(date +%u) 
+allowed_months="02 05 08 11"
+if [ "$weekday" -ne 6 ] || [[ ! "$allowed_months" =~ $month ]]; then
+    exit 0
+fi
+saturdays=($(cal | awk 'NF {if ($1 ~ /^[0-9]+$/) for (i=1;i<=NF;i++) if (NR==2+i || NR>2+i && $(i)==i) if (i==7) print $(i)}'))
+first_saturday=${saturdays[0]}
+last_saturday=${saturdays[-1]}
+if [ "$day" -ne "$first_saturday" ] && [ "$day" -ne "$last_saturday" ]; then
+    exit 0 
+fi
 if ! id -nG "$USER" | grep -qw "g_admin"; then
         echo "Only admins can run this script"
         exit 1
 fi
-
 REPORT_DIR="/home/admin/$USER"
 REPORT_FILE="$REPORT_DIR/blog_report_$(date +%Y-%m-%d).txt"
-
 echo "Activity Report $(date)" > "$REPORT_FILE"
-
 declare -A CATEGORY_MAP
 for f in /home/authors/*/files/blogs.yaml; do
         [[ -f "$f" ]] || continue
